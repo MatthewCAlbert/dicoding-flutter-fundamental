@@ -4,11 +4,13 @@ import 'package:restofulist/data/model/restaurant.dart';
 import 'package:restofulist/ui/components/platform_widget.dart';
 
 class RestaurantDetailMenusView extends StatefulWidget {
-  const RestaurantDetailMenusView({Key? key, required this.restaurant}) : super(key: key);
+  const RestaurantDetailMenusView({Key? key, required this.restaurant})
+      : super(key: key);
   final Restaurant restaurant;
 
   @override
-  State<RestaurantDetailMenusView> createState() => _RestaurantDetailMenusViewState();
+  State<RestaurantDetailMenusView> createState() =>
+      _RestaurantDetailMenusViewState();
 }
 
 class _RestaurantDetailMenusViewState extends State<RestaurantDetailMenusView> {

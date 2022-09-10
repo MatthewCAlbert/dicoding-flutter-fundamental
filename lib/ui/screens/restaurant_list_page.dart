@@ -12,7 +12,8 @@ class RestaurantListPage extends StatelessWidget {
 
   Widget _buildList(BuildContext context) {
     return FutureBuilder<String>(
-      future: DefaultAssetBundle.of(context).loadString('assets/data/local_restaurant.json'),
+      future: DefaultAssetBundle.of(context)
+          .loadString('assets/data/local_restaurant.json'),
       builder: (context, snapshot) {
         final List<Restaurant> restaurants = parseRestaurants(snapshot.data);
         return ListView.builder(
@@ -31,84 +32,91 @@ class RestaurantListPage extends StatelessWidget {
       child: ListTile(
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        subtitle: Container(alignment: Alignment.center, child: Row(
-          children: [
-            Hero(
-              tag: restaurant.id,
-              child: 
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    restaurant.pictureId,
-                    width: 110,
-                    height: 72,
-                    fit: BoxFit.cover,
+        subtitle: Container(
+            alignment: Alignment.center,
+            child: Row(
+              children: [
+                Hero(
+                  tag: restaurant.id,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      restaurant.pictureId,
+                      width: 110,
+                      height: 72,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-            ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  restaurant.name,
-                  style: Theme.of(context).textTheme.subtitle1!
-                    .copyWith(fontWeight: FontWeight.w600),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                const SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(
-                      Icons.location_on,
-                      size: 20.0,
-                      semanticLabel: 'Map Icon',
-                    ),
-                    const SizedBox(width: 2.0),
                     Text(
-                      restaurant.city,
-                      style: Theme.of(context).textTheme.caption,
-                    )
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.red,
-                      ),
-                      child: Text(
-                        '${restaurant.menus.foods.length.toString()} Foods',
-                        style: Theme.of(context).textTheme.caption!.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      restaurant.name,
+                      style: Theme.of(context)
+                          .textTheme
+                          .subtitle1!
+                          .copyWith(fontWeight: FontWeight.w600),
                     ),
-                    const SizedBox(width: 6.0),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: secondaryRed,
-                      ),
-                      child: Text(
-                        '${restaurant.menus.drinks.length.toString()} Drinks',
-                        style: Theme.of(context).textTheme.caption!.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(
+                          Icons.location_on,
+                          size: 20.0,
+                          semanticLabel: 'Map Icon',
                         ),
-                      ),
+                        const SizedBox(width: 2.0),
+                        Text(
+                          restaurant.city,
+                          style: Theme.of(context).textTheme.caption,
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 4.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.red,
+                          ),
+                          child: Text(
+                            '${restaurant.menus.foods.length.toString()} Foods',
+                            style:
+                                Theme.of(context).textTheme.caption!.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                          ),
+                        ),
+                        const SizedBox(width: 6.0),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 4.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: secondaryRed,
+                          ),
+                          child: Text(
+                            '${restaurant.menus.drinks.length.toString()} Drinks',
+                            style:
+                                Theme.of(context).textTheme.caption!.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
-                ),
+                )
               ],
-            )
-          ],
-        )),
+            )),
         onTap: () {
           Navigator.pushNamed(context, RestaurantDetailPage.routeName,
               arguments: restaurant);
@@ -127,14 +135,14 @@ class RestaurantListPage extends StatelessWidget {
           Text(
             'Restofulist',
             style: Theme.of(context).textTheme.headline4!.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
           Text(
             'a pique interest',
             style: Theme.of(context).textTheme.subtitle1!.copyWith(
-              fontWeight: FontWeight.w300,
-            ),
+                  fontWeight: FontWeight.w300,
+                ),
           ),
           const SizedBox(height: 20),
           Expanded(

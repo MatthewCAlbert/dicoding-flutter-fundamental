@@ -7,7 +7,8 @@ class RestaurantDetailPage extends StatelessWidget {
 
   final Restaurant restaurant;
 
-  const RestaurantDetailPage({Key? key, required this.restaurant}) : super(key: key);
+  const RestaurantDetailPage({Key? key, required this.restaurant})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,7 @@ class RestaurantDetailPage extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-                tag: restaurant.id,
-                child: Image.network(restaurant.pictureId)),
+                tag: restaurant.id, child: Image.network(restaurant.pictureId)),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
