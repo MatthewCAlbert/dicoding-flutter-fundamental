@@ -56,16 +56,12 @@ class _RestaurantDetailMenusViewState extends State<RestaurantDetailMenusView> {
                   painter: DrawDottedHorizontalLine(),
                 ),
               ),
-              Container(
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    for (final item in _shownMenus)
-                      _buildMenuItem(context, item),
-                  ],
-                ),
-              )
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (final item in _shownMenus) _buildMenuItem(context, item),
+                ],
+              ),
             ],
           )),
     );

@@ -57,7 +57,6 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
     return ListView.builder(
       itemCount: _queryResults.length,
       itemBuilder: (context, index) {
-        final restaurant = _queryResults[index];
         return _buildRestaurantItem(context, _queryResults[index]);
       },
     );

@@ -28,8 +28,6 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(elevation: 0),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            primary: secondaryColor,
-            onPrimary: Colors.white,
             textStyle: const TextStyle(),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
