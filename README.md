@@ -14,8 +14,9 @@ Restofulist
 
 ### Features
 
-- [ ] Restaurant List
-- [ ] Search restaurant
-- [ ] See a restaurant detail
-- [ ] Select drink/food restaurant menu detail
+- [x] Restaurant List
+- [x] Search restaurant
+- [x] See a restaurant detail
+- [x] Select drink/food restaurant menu detail
+- [ ] UI Improvement (incl. Sliver)
 - [ ] Splash Screen

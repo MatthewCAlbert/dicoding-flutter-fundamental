@@ -73,16 +73,18 @@ class Menus {
     required this.drinks,
   });
 
-  List<Drink> foods;
-  List<Drink> drinks;
+  List<RestaurantMenuItem> foods;
+  List<RestaurantMenuItem> drinks;
 
   factory Menus.fromRawJson(String str) => Menus.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
   factory Menus.fromJson(Map<String, dynamic> json) => Menus(
-        foods: List<Drink>.from(json["foods"].map((x) => Drink.fromJson(x))),
-        drinks: List<Drink>.from(json["drinks"].map((x) => Drink.fromJson(x))),
+        foods: List<RestaurantMenuItem>.from(
+            json["foods"].map((x) => RestaurantMenuItem.fromJson(x))),
+        drinks: List<RestaurantMenuItem>.from(
+            json["drinks"].map((x) => RestaurantMenuItem.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -91,18 +93,20 @@ class Menus {
       };
 }
 
-class Drink {
-  Drink({
+class RestaurantMenuItem {
+  RestaurantMenuItem({
     required this.name,
   });
 
   String name;
 
-  factory Drink.fromRawJson(String str) => Drink.fromJson(json.decode(str));
+  factory RestaurantMenuItem.fromRawJson(String str) =>
+      RestaurantMenuItem.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Drink.fromJson(Map<String, dynamic> json) => Drink(
+  factory RestaurantMenuItem.fromJson(Map<String, dynamic> json) =>
+      RestaurantMenuItem(
         name: json["name"],
       );
 
