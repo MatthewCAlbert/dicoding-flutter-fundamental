@@ -13,6 +13,9 @@ class DrawDottedHorizontalLine extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     for (double i = -300; i < 300; i = i + 15) {
       // 15 is space between dots
+      // if (i < -185 || i > 175) {
+      //   continue;
+      // }
       if (i % 3 == 0) {
         canvas.drawLine(Offset(i, 0.0), Offset(i + 10, 0.0), _paint);
       }

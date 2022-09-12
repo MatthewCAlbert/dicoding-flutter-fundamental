@@ -4,7 +4,7 @@ By Matthew Christopher Albert
 
 ## Submissions
 
-- TBA
+- September 12, 2022
 
 ## Details
  
@@ -18,5 +18,5 @@ Restofulist
 - [x] Search restaurant
 - [x] See a restaurant detail
 - [x] Select drink/food restaurant menu detail
-- [ ] UI Improvement (incl. Sliver)
-- [ ] Splash Screen
+- [x] UI Improvement
+- [x] Splash Screen

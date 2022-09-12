@@ -25,19 +25,27 @@ class _RestaurantDetailMenusViewState extends State<RestaurantDetailMenusView> {
   }
 
   Widget _buildMenuItem(BuildContext context, RestaurantMenuItem item) {
-    return Column(
-      children: [
-        const SizedBox(height: 17),
-        Text(
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      const SizedBox(height: 17),
+      Container(
+        alignment: Alignment.centerLeft,
+        child: Text(
           item.name,
           style: Theme.of(context).textTheme.headline6!.copyWith(
                 fontWeight: FontWeight.w600,
               ),
         ),
-        const SizedBox(height: 17),
-        CustomPaint(painter: DrawDottedHorizontalLine()),
-      ],
-    );
+      ),
+      const SizedBox(height: 17),
+      // layout builder
+      LayoutBuilder(
+        builder: (context, constraints) {
+          return CustomPaint(
+            painter: DrawDottedHorizontalLine(),
+          );
+        },
+      )
+    ]);
   }
 
   Widget _buildMenus(BuildContext context) {
@@ -56,12 +64,7 @@ class _RestaurantDetailMenusViewState extends State<RestaurantDetailMenusView> {
                   painter: DrawDottedHorizontalLine(),
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  for (final item in _shownMenus) _buildMenuItem(context, item),
-                ],
-              ),
+              for (final item in _shownMenus) _buildMenuItem(context, item),
             ],
           )),
     );
