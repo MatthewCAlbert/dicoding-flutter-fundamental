@@ -119,7 +119,6 @@ class _RestaurantDetailMenusViewState extends State<RestaurantDetailMenusView> {
         ),
         const SizedBox(height: 15),
         _buildMenus(context),
-        const SizedBox(height: 40),
       ],
     );
   }

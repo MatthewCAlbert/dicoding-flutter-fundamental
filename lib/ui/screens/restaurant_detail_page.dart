@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restofulist/data/api/api_service.dart';
 import 'package:restofulist/data/model/restaurant.dart';
+import 'package:restofulist/provider/restaurant_provider.dart';
 import 'package:restofulist/ui/components/platform_widget.dart';
 import 'package:restofulist/ui/components/restaurant_detail_menus.dart';
 
 class RestaurantDetailPage extends StatelessWidget {
   static const routeName = '/article_detail';
 
-  final Restaurant restaurant;
+  const RestaurantDetailPage({Key? key}) : super(key: key);
 
-  const RestaurantDetailPage({Key? key, required this.restaurant})
-      : super(key: key);
-
-  Widget _buildAppBar(BuildContext context) {
+  Widget _buildAppBar(BuildContext context, Restaurant restaurant) {
     return Column(
       children: [
         const SizedBox(height: 5),
@@ -64,17 +64,29 @@ class RestaurantDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _buildContent(BuildContext context) {
+  Widget _buildContent(BuildContext context, Restaurant restaurant) {
     return SafeArea(
         child: SingleChildScrollView(
       child: Column(
         children: [
-          Hero(tag: restaurant.id, child: Image.network(restaurant.pictureId)),
+          Hero(
+              tag: restaurant.id,
+              child: Image.network(
+                  ApiService.getPictureUrl(restaurant.pictureId))),
           Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Wrap(
+                  spacing: 5,
+                  children: restaurant.categories
+                      .map((e) => Chip(
+                            label: Text(e.name),
+                            backgroundColor: Colors.amber,
+                          ))
+                      .toList(),
+                ),
                 const Divider(color: Colors.grey),
                 Text(
                   restaurant.description,
@@ -83,6 +95,36 @@ class RestaurantDetailPage extends StatelessWidget {
                 const SizedBox(height: 10),
                 const Divider(color: Colors.grey),
                 RestaurantDetailMenusView(restaurant: restaurant),
+                const SizedBox(height: 10),
+                const Divider(color: Colors.grey),
+                const SizedBox(height: 10),
+                Text(
+                  'Customer Review (${restaurant.customerReviews.length})',
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                const SizedBox(height: 10),
+                LimitedBox(
+                  maxHeight: 400,
+                  child: ListView.builder(
+                    itemCount: restaurant.customerReviews.length,
+                    itemBuilder: (context, index) {
+                      final review = restaurant.customerReviews[index];
+                      return ListTile(
+                        title: Text(review.name),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 10),
+                        subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(review.date),
+                              const SizedBox(height: 3),
+                              Text(review.review),
+                            ]),
+                        leading: const Icon(Icons.person),
+                      );
+                    },
+                  ),
+                )
               ],
             ),
           ),
@@ -92,12 +134,39 @@ class RestaurantDetailPage extends StatelessWidget {
   }
 
   Widget _buildAndroid(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: _buildAppBar(context),
-      ),
-      body: _buildContent(context),
-    );
+    return Consumer<RestaurantDetailProvider>(
+        builder: (context, provider, child) {
+      if (provider.state == ApiResultState.loading) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      } else if (provider.state == ApiResultState.hasData) {
+        return Scaffold(
+          appBar: AppBar(
+            title: _buildAppBar(context, provider.result.restaurant),
+          ),
+          body: _buildContent(context, provider.result.restaurant),
+        );
+      } else if (provider.state == ApiResultState.error) {
+        return Center(
+          child: Text(
+            'An error occured',
+            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                  fontWeight: FontWeight.w300,
+                ),
+          ),
+        );
+      } else {
+        return Center(
+          child: Text(
+            'Nothing to see here',
+            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                  fontWeight: FontWeight.w300,
+                ),
+          ),
+        );
+      }
+    });
   }
 
   @override
