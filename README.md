@@ -5,7 +5,7 @@ By Matthew Christopher Albert
 ## Submissions
 
 - Submission 1: September 12, 2022
-- Submission 2: TBD
+- Submission 2: September 17, 2022
 - Submission 3: TBD
 
 ## Details
@@ -23,4 +23,4 @@ Restofulist
 - [x] Select drink/food restaurant menu detail
 - [x] UI Improvement
 - [x] Splash Screen
-- [ ] Add Review
+- [x] Add Review
