@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:restofulist/data/api/api_service.dart';
+import 'package:restofulist/data/model/api/restaurant_add_review.dart';
 import 'package:restofulist/data/model/api/restaurant_detail.dart';
 import 'package:restofulist/data/model/api/restaurant_list.dart';
 import 'package:restofulist/data/model/api/restaurant_search.dart';
@@ -89,7 +90,7 @@ class RestaurantDetailProvider extends ChangeNotifier {
   final String id;
 
   RestaurantDetailProvider({required this.apiService, required this.id}) {
-    _fetch(id);
+    fetch(id);
   }
 
   late RestaurantDetailResponse _result;
@@ -102,7 +103,7 @@ class RestaurantDetailProvider extends ChangeNotifier {
 
   ApiResultState get state => _state;
 
-  Future<dynamic> _fetch(String id) async {
+  Future<dynamic> fetch(String id) async {
     try {
       _state = ApiResultState.loading;
       notifyListeners();
@@ -110,6 +111,40 @@ class RestaurantDetailProvider extends ChangeNotifier {
       _state = ApiResultState.hasData;
       notifyListeners();
       return _result = restaurant;
+    } catch (e) {
+      _state = ApiResultState.error;
+      notifyListeners();
+      return _message = 'Error --> $e';
+    }
+  }
+}
+
+class RestaurantAddReviewProvider extends ChangeNotifier {
+  final ApiService apiService;
+
+  RestaurantAddReviewProvider({required this.apiService}) {
+    _state = ApiResultState.noData;
+  }
+
+  late RestaurantAddReviewResponse _result;
+  late ApiResultState _state;
+  String _message = '';
+
+  String get message => _message;
+
+  RestaurantAddReviewResponse get result => _result;
+
+  ApiResultState get state => _state;
+
+  Future<dynamic> send(RestaurantAddReviewRequest body) async {
+    try {
+      _state = ApiResultState.loading;
+      notifyListeners();
+      final response =
+          await apiService.addRestaurantReview(body.id, body.name, body.review);
+      _state = ApiResultState.hasData;
+      notifyListeners();
+      return _result = response;
     } catch (e) {
       _state = ApiResultState.error;
       notifyListeners();

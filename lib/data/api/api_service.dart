@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:restofulist/data/model/api/restaurant_add_review.dart';
 import 'package:restofulist/data/model/api/restaurant_detail.dart';
 import 'package:restofulist/data/model/api/restaurant_list.dart';
 import 'package:restofulist/data/model/api/restaurant_search.dart';
@@ -37,7 +38,7 @@ class ApiService {
     }
   }
 
-  Future<RestaurantDetailResponse> addRestaurantReview(
+  Future<RestaurantAddReviewResponse> addRestaurantReview(
       String id, String name, String review) async {
     final response = await http.post(Uri.parse("$_baseUrl/review"),
         headers: {
@@ -48,8 +49,8 @@ class ApiService {
           'name': name,
           'review': review,
         }));
-    if (response.statusCode == 200) {
-      return RestaurantDetailResponse.fromJson(json.decode(response.body));
+    if (response.statusCode == 201) {
+      return RestaurantAddReviewResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to add restaurant review');
     }

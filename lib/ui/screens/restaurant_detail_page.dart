@@ -5,6 +5,7 @@ import 'package:restofulist/data/model/restaurant.dart';
 import 'package:restofulist/provider/restaurant_provider.dart';
 import 'package:restofulist/ui/components/platform_widget.dart';
 import 'package:restofulist/ui/components/restaurant_detail_menus.dart';
+import 'package:restofulist/ui/screens/restaurant_add_review.dart';
 
 class RestaurantDetailPage extends StatelessWidget {
   static const routeName = '/article_detail';
@@ -101,6 +102,22 @@ class RestaurantDetailPage extends StatelessWidget {
                 Text(
                   'Customer Review (${restaurant.customerReviews.length})',
                   style: Theme.of(context).textTheme.headline5,
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, RestaurantAddReviewPage.routeName,
+                        arguments: RestaurantAddReviewPageIntent(
+                            restaurant,
+                            () => {
+                                  Provider.of<RestaurantDetailProvider>(context,
+                                          listen: false)
+                                      .fetch(restaurant.id)
+                                }));
+                  },
+                  icon: const Icon(Icons.add),
+                  label: const Text('Add Review'),
                 ),
                 const SizedBox(height: 10),
                 LimitedBox(

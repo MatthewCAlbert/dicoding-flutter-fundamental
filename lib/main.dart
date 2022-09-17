@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:restofulist/common/styles.dart';
 import 'package:restofulist/data/api/api_service.dart';
 import 'package:restofulist/provider/restaurant_provider.dart';
+import 'package:restofulist/ui/screens/restaurant_add_review.dart';
 import 'package:restofulist/ui/screens/restaurant_detail_page.dart';
 import 'package:restofulist/ui/screens/restaurant_list_page.dart';
 import 'package:restofulist/ui/screens/restaurant_search_page.dart';
@@ -76,6 +77,11 @@ class MyApp extends StatelessWidget {
                   apiService: ApiService(),
                   id: ModalRoute.of(context)?.settings.arguments as String),
               child: const RestaurantDetailPage(),
+            ),
+        RestaurantAddReviewPage.routeName: (context) => ChangeNotifierProvider(
+              create: (_) =>
+                  RestaurantAddReviewProvider(apiService: ApiService()),
+              child: const RestaurantAddReviewPage(),
             ),
       },
     );
