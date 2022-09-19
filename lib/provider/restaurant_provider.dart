@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:restofulist/data/api/api_service.dart';
@@ -38,6 +39,10 @@ class RestaurantListProvider extends ChangeNotifier {
         notifyListeners();
         return _result = restaurant;
       }
+    } on SocketException catch (e) {
+      _state = ApiResultState.noInternet;
+      notifyListeners();
+      return _message = 'Error --> $e';
     } catch (e) {
       _state = ApiResultState.error;
       notifyListeners();
@@ -77,6 +82,10 @@ class RestaurantSearchProvider extends ChangeNotifier {
         notifyListeners();
         return _result = restaurant;
       }
+    } on SocketException catch (e) {
+      _state = ApiResultState.noInternet;
+      notifyListeners();
+      return _message = 'Error --> $e';
     } catch (e) {
       _state = ApiResultState.error;
       notifyListeners();
@@ -111,6 +120,10 @@ class RestaurantDetailProvider extends ChangeNotifier {
       _state = ApiResultState.hasData;
       notifyListeners();
       return _result = restaurant;
+    } on SocketException catch (e) {
+      _state = ApiResultState.noInternet;
+      notifyListeners();
+      return _message = 'Error --> $e';
     } catch (e) {
       _state = ApiResultState.error;
       notifyListeners();
@@ -145,6 +158,10 @@ class RestaurantAddReviewProvider extends ChangeNotifier {
       _state = ApiResultState.hasData;
       notifyListeners();
       return _result = response;
+    } on SocketException catch (e) {
+      _state = ApiResultState.noInternet;
+      notifyListeners();
+      return _message = 'Error --> $e';
     } catch (e) {
       _state = ApiResultState.error;
       notifyListeners();

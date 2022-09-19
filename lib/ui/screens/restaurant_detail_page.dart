@@ -159,8 +159,10 @@ class RestaurantDetailPage extends StatelessWidget {
     return Consumer<RestaurantDetailProvider>(
         builder: (context, provider, child) {
       if (provider.state == ApiResultState.loading) {
-        return const Center(
-          child: CircularProgressIndicator(),
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
         );
       } else if (provider.state == ApiResultState.hasData) {
         return Scaffold(
@@ -170,21 +172,36 @@ class RestaurantDetailPage extends StatelessWidget {
           body: _buildContent(context, provider.result.restaurant),
         );
       } else if (provider.state == ApiResultState.error) {
-        return Center(
-          child: Text(
-            'An error occured',
-            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                  fontWeight: FontWeight.w300,
-                ),
+        return Scaffold(
+          body: Center(
+            child: Text(
+              'Failed to load restaurant detail',
+              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                    fontWeight: FontWeight.w300,
+                  ),
+            ),
+          ),
+        );
+      } else if (provider.state == ApiResultState.noInternet) {
+        return Scaffold(
+          body: Center(
+            child: Text(
+              'No Internet Connection',
+              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                    fontWeight: FontWeight.w300,
+                  ),
+            ),
           ),
         );
       } else {
-        return Center(
-          child: Text(
-            'Nothing to see here',
-            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                  fontWeight: FontWeight.w300,
-                ),
+        return Scaffold(
+          body: Center(
+            child: Text(
+              'Nothing to see here',
+              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                    fontWeight: FontWeight.w300,
+                  ),
+            ),
           ),
         );
       }

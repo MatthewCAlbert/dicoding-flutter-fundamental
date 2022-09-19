@@ -5,7 +5,7 @@ import 'package:restofulist/data/model/api/restaurant_detail.dart';
 import 'package:restofulist/data/model/api/restaurant_list.dart';
 import 'package:restofulist/data/model/api/restaurant_search.dart';
 
-enum ApiResultState { loading, noData, hasData, error }
+enum ApiResultState { loading, noData, hasData, error, noInternet }
 
 class ApiService {
   static const String _baseUrl = 'https://restaurant-api.dicoding.dev';

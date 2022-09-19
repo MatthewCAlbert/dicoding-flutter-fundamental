@@ -71,7 +71,16 @@ class RestaurantSearchResult extends StatelessWidget {
       } else if (provider.state == ApiResultState.error) {
         return Center(
           child: Text(
-            'An error occured',
+            'Failed to load search result',
+            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                  fontWeight: FontWeight.w300,
+                ),
+          ),
+        );
+      } else if (provider.state == ApiResultState.noInternet) {
+        return Center(
+          child: Text(
+            'No Internet Connection',
             style: Theme.of(context).textTheme.subtitle1!.copyWith(
                   fontWeight: FontWeight.w300,
                 ),
