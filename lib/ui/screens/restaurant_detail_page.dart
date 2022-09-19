@@ -23,7 +23,10 @@ class RestaurantDetailPage extends StatelessWidget {
                 child: Text(
               restaurant.name,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5!
+                  .copyWith(color: Colors.white),
             )),
             Row(children: [
               const SizedBox(width: 4.0),
@@ -35,9 +38,10 @@ class RestaurantDetailPage extends StatelessWidget {
               const SizedBox(width: 5),
               Text(
                 restaurant.rating.toString(),
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(fontWeight: FontWeight.w600, color: Colors.white),
               ),
             ]),
           ],
@@ -54,9 +58,10 @@ class RestaurantDetailPage extends StatelessWidget {
             const SizedBox(width: 2.0),
             Text(
               restaurant.city,
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontWeight: FontWeight.w300,
-                  ),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .copyWith(fontWeight: FontWeight.w300, color: Colors.white),
             )
           ],
         ),

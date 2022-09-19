@@ -76,7 +76,7 @@ class _RestaurantDetailMenusViewState extends State<RestaurantDetailMenusView> {
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         backgroundColor: _menuIndex == index
-            ? primaryColor
+            ? Colors.white
             : Theme.of(context).colorScheme.surface,
       ),
       child: InkWell(

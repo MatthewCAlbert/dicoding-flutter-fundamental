@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
       title: 'Restofulist',
       theme: ThemeData(
         colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: primaryColor,
-              onPrimary: Colors.black,
+              primary: primaryRed,
+              onPrimary: Colors.white,
               secondary: secondaryColor,
             ),
         scaffoldBackgroundColor: Colors.white,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:restofulist/common/styles.dart';
 import 'package:restofulist/data/api/api_service.dart';
 import 'package:restofulist/data/model/api/restaurant_list.dart';
 
@@ -14,7 +13,7 @@ class RestaurantItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: primaryColor,
+      color: Colors.white,
       child: ListTile(
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -68,11 +67,15 @@ class RestaurantItem extends StatelessWidget {
                       )),
                 ),
                 const SizedBox(width: 10),
-                Column(
+                Expanded(
+                    child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       restaurant.name,
+                      maxLines: 2,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
                           .textTheme
                           .subtitle1!
@@ -94,7 +97,7 @@ class RestaurantItem extends StatelessWidget {
                       ],
                     ),
                   ],
-                )
+                ))
               ],
             )),
         onTap: onTap as void Function()?,
