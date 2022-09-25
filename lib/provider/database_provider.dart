@@ -32,6 +32,7 @@ class DatabaseProvider extends ChangeNotifier {
 
   void addFavorite(RestaurantShortVersion restaurant) async {
     try {
+      print('haha');
       await databaseHelper.insertFavorite(restaurant);
       _getFavorites();
     } catch (e) {
