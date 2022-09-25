@@ -36,5 +36,8 @@ jobs:
       - name: Analyze files
         run: flutter analyze .
 
+      - name: Test
+        run: flutter test
+
       - run: |
           flutter build ios --no-codesign
