@@ -6,7 +6,7 @@ By Matthew Christopher Albert
 
 - Submission 1: September 12, 2022
 - Submission 2: September 17, 2022
-- Submission 3: TBD
+- Submission 3: September 25, 2022
 
 ## Details
  
