@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restofulist/data/api/api_service.dart';
+import 'package:restofulist/data/model/api/restaurant_list.dart';
 import 'package:restofulist/data/model/restaurant.dart';
 import 'package:restofulist/provider/restaurant_provider.dart';
 import 'package:restofulist/ui/components/platform_widget.dart';
 import 'package:restofulist/ui/components/restaurant_detail_menus.dart';
+import 'package:restofulist/ui/components/restaurant_favorite_button.dart';
 import 'package:restofulist/ui/screens/restaurant_add_review.dart';
 
 class RestaurantDetailPage extends StatelessWidget {
@@ -77,8 +79,34 @@ class RestaurantDetailPage extends StatelessWidget {
         children: [
           Hero(
               tag: restaurant.id,
-              child: Image.network(
-                  ApiService.getPictureUrl(restaurant.pictureId))),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.network(
+                    ApiService.getPictureUrl(restaurant.pictureId),
+                  ),
+                  Positioned(
+                    bottom: 5,
+                    right: 5,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 8.0),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      child: RestaurantFavoriteButton(
+                          restaurant: RestaurantShortVersion(
+                              id: restaurant.id,
+                              description: restaurant.description,
+                              name: restaurant.name,
+                              pictureId: restaurant.pictureId,
+                              city: restaurant.city,
+                              rating: restaurant.rating)),
+                    ),
+                  ),
+                ],
+              )),
           Padding(
             padding: const EdgeInsets.all(10),
             child: Column(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restofulist/data/api/api_service.dart';
 import 'package:restofulist/data/model/api/restaurant_list.dart';
+import 'package:restofulist/ui/components/restaurant_favorite_button.dart';
 
 class RestaurantItem extends StatelessWidget {
   const RestaurantItem(
@@ -97,7 +98,9 @@ class RestaurantItem extends StatelessWidget {
                       ],
                     ),
                   ],
-                ))
+                )),
+                const SizedBox(width: 10),
+                RestaurantFavoriteButton(restaurant: restaurant),
               ],
             )),
         onTap: onTap as void Function()?,

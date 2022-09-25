@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:restofulist/common/navigation.dart';
 import 'package:restofulist/data/model/api/restaurant_list.dart';
@@ -58,11 +59,13 @@ class NotificationHelper {
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);
 
-    var titleNotification = "<b>Top Picks Restaurant</b>";
-    var titleNews = response.restaurants[0].name;
+    var titleNotification = "<b>Today's Random Restaurant</b>";
+    var random = Random();
+    var restaurantName =
+        response.restaurants[random.nextInt(response.restaurants.length)].name;
 
     await flutterLocalNotificationsPlugin.show(
-        0, titleNotification, titleNews, platformChannelSpecifics,
+        0, titleNotification, restaurantName, platformChannelSpecifics,
         payload: json.encode(response.toJson()));
   }
 

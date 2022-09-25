@@ -104,7 +104,6 @@ class _RestaurantAddReviewPageState extends State<RestaurantAddReviewPage> {
                 },
               ),
               const SizedBox(height: 8),
-              // colored elevated button
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryRed,

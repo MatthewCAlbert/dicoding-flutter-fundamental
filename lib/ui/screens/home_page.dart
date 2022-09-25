@@ -4,7 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:restofulist/common/styles.dart';
 import 'package:restofulist/ui/components/platform_widget.dart';
+import 'package:restofulist/ui/screens/favorite_list_page.dart';
+import 'package:restofulist/ui/screens/restaurant_detail_page.dart';
 import 'package:restofulist/ui/screens/restaurant_list_page.dart';
+import 'package:restofulist/ui/screens/settings_page.dart';
+import 'package:restofulist/utils/notification_helper.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -17,21 +21,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _bottomNavIndex = 0;
-  static const String _headlineText = 'Headline';
+  final NotificationHelper _notificationHelper = NotificationHelper();
 
   final List<Widget> _listWidget = [
     const RestaurantListPage(),
-    const RestaurantListPage(),
+    const FavoriteListPage(),
+    const SettingsPage(),
   ];
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = [
     BottomNavigationBarItem(
-      icon: Icon(Platform.isIOS ? CupertinoIcons.news : Icons.public),
-      label: _headlineText,
+      icon: Icon(Platform.isIOS ? CupertinoIcons.home : Icons.home),
+      label: "Home",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Platform.isIOS ? CupertinoIcons.news : Icons.public),
-      label: "Test",
+      icon: Icon(Platform.isIOS ? CupertinoIcons.heart : Icons.favorite),
+      label: "Favorite",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),
+      label: "Settings",
     ),
   ];
 
@@ -57,12 +66,25 @@ class _HomePageState extends State<HomePage> {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         items: _bottomNavBarItems,
-        activeColor: secondaryColor,
+        activeColor: primaryRed,
       ),
       tabBuilder: (context, index) {
         return _listWidget[index];
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _notificationHelper
+        .configureSelectNotificationSubject(RestaurantDetailPage.routeName);
+  }
+
+  @override
+  void dispose() {
+    selectNotificationSubject.close();
+    super.dispose();
   }
 
   @override
